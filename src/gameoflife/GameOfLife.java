@@ -66,48 +66,25 @@ public class GameOfLife {
     //calculate positions of next generation
     public static void calcs() {
         int adjacent = 0;
-        //
-        for (int i = 1; i < cells-1; i++) {
-            for (int j = 1; j < cells-1; j++) {
-                adjacent = 0;
-                if (cell[i][j].equals(dead)) {
-                    if (cell[i - 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i + 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j - 1].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j + 1].equals(alive)){adjacent += 1;}  
-                        if (adjacent == 3) {
-                            cell[i][j] = alive;
-                            adjacent = 0;
-                        }else {
-                            cell[i][j] = dead;
-                            adjacent = 0;
-                        }
-                    
-                } else if (cell[i][j].equals(alive)) {
-                    
-                    if (cell[i - 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i + 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j - 1].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j + 1].equals(alive)){adjacent += 1;}  
-                        
-                        if (adjacent >= 2 && adjacent < 4) {
-                            cell[i][j] = alive;
-                            adjacent = 0;
-                        }else{
-                            cell[i][j] = dead;
-                            adjacent = 0;
-                    } 
-                }
-            }
-        }
         
-        //20s
-        for (int i = 19; i < cells; i++) {
-            for (int j = 19; j < cells; j++) {
+        for (int i = 0; i < cells-1; i++) {
+            for (int j = 0; j < cells-1; j++) {
                 adjacent = 0;
+                    
                 if (cell[i][j].equals(dead)) {
-                    if (cell[i - 1][j].equals(alive)){adjacent += 1;} 
+                    if(i > 0){
+                    if(cell[i - 1][j].equals(alive)){adjacent += 1;} 
+                    }
+                    if(i < cells-1){
+                    if(cell[i + 1][j].equals(alive)){adjacent += 1;} 
+                    }
+                    if(j > 0){
                     if(cell[i][j - 1].equals(alive)){adjacent += 1;} 
+                    }
+                    if(j < cells-1){
+                    if(cell[i][j + 1].equals(alive)){adjacent += 1;}
+                    
+                    }
                         if (adjacent == 3) {
                             cell[i][j] = alive;
                             adjacent = 0;
@@ -116,42 +93,21 @@ public class GameOfLife {
                             adjacent = 0;
                         }
                     
-                } else if (cell[i][j].equals(alive)) {
-                    
-                    if (cell[i - 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j - 1].equals(alive)){adjacent += 1;} 
-                        
-                        if (adjacent >= 2 && adjacent < 4) {
-                            cell[i][j] = alive;
-                            adjacent = 0;
-                        }else{
-                            cell[i][j] = dead;
-                            adjacent = 0;
-                    } 
                 }
-            }
-        }
-    
-    //0s
-    for (int i = 0; i < 1; i++) {
-            for (int j = 0; j < 1; j++) {
-                adjacent = 0;
-                if (cell[i][j].equals(dead)) {
-                    if (cell[i + 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j + 1].equals(alive)){adjacent += 1;} 
-                        if (adjacent == 3) {
-                            cell[i][j] = alive;
-                            adjacent = 0;
-                        }else {
-                            cell[i][j] = dead;
-                            adjacent = 0;
-                        }
-                    
-                } else if (cell[i][j].equals(alive)) {
-                    
-                    if (cell[i + 1][j].equals(alive)){adjacent += 1;} 
-                    if(cell[i][j + 1].equals(alive)){adjacent += 1;} 
-                        
+                
+                if (cell[i][j].equals(alive)) {
+                   if(i > 0){
+                    if(cell[i - 1][j].equals(alive)){adjacent += 1;} 
+                    }
+                    if(i < cells - 1){
+                    if(cell[i + 1][j].equals(alive)){adjacent += 1;} 
+                    }
+                    if(j > 0){
+                    if(cell[i][j - 1].equals(alive)){adjacent += 1;} 
+                    }
+                    if(j < cells - 1){
+                    if(cell[i][j + 1].equals(alive)){adjacent += 1;}
+                    }  
                         if (adjacent >= 2 && adjacent < 4) {
                             cell[i][j] = alive;
                             adjacent = 0;
@@ -163,6 +119,7 @@ public class GameOfLife {
             }
         }
     }
+    
     
     //load next generation
     public static void nextGen() {
