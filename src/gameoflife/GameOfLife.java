@@ -10,7 +10,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Kyle's PC
+ * @author Kyle Lukaszek
+ * March 6th 2019
+ * Game of Life
  */
 public class GameOfLife {
 
@@ -18,7 +20,10 @@ public class GameOfLife {
      * @param args the command line arguments
      * @return
      */
+    
     //public variables for usage across methods
+    
+    //Grid size selection
     public static String howMany = JOptionPane.showInputDialog("Welcome to the game of life!\nPlease enter how many cells you wish to start the game with.");
     public static int cells = (int) Math.sqrt((double) Integer.parseInt(howMany));
     public static String[][] cell = new String[cells][cells];
@@ -28,7 +33,7 @@ public class GameOfLife {
     public static Random rand = new Random();
     public static int gen = 0;
 
-    //print cells to console
+    //print cells to console in correct order
     public static void initCells() {
 
         for (int i = 0; i < cells; i++) {
@@ -47,7 +52,7 @@ public class GameOfLife {
     public static void firstGen() {
 
         System.out.println("----Generation 0-------------------------------------------------");
-        int randomCells = (int) rand.nextInt((int) Math.pow(cells, 2) - 20); //max - min + 1
+        int randomCells = (int) rand.nextInt((int) Math.pow(cells, 2) - 0 + 1); //max - min + 1
         for (int i = 0; i < cells; i++) {
             for (int j = 0; j < cells; j++) {
                 cell[i][j] = dead;
@@ -67,8 +72,8 @@ public class GameOfLife {
     public static void calcs() {
         int adjacent = 0;
         
-        for (int i = 0; i < cells-1; i++) {
-            for (int j = 0; j < cells-1; j++) {
+        for (int i = 0; i <= cells - 1; i++) {
+            for (int j = 0; j <= cells - 1; j++) {
                 adjacent = 0;
                     
                 if (cell[i][j].equals(dead)) {
@@ -83,19 +88,17 @@ public class GameOfLife {
                     }
                     if(j < cells-1){
                     if(cell[i][j + 1].equals(alive)){adjacent += 1;}
-                    
                     }
                         if (adjacent == 3) {
                             cell[i][j] = alive;
                             adjacent = 0;
-                        }else {
+                        }else{
                             cell[i][j] = dead;
                             adjacent = 0;
                         }
-                    
                 }
                 
-                if (cell[i][j].equals(alive)) {
+                else if (cell[i][j].equals(alive)) {
                    if(i > 0){
                     if(cell[i - 1][j].equals(alive)){adjacent += 1;} 
                     }
@@ -154,7 +157,6 @@ public class GameOfLife {
                     System.exit(0);
                 }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
