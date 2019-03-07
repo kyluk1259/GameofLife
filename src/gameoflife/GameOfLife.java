@@ -25,10 +25,8 @@ public abstract class GameOfLife implements WindowListener {
      */
     
     //public variables for usage across methods
-    
-    //Grid size selection
-    public static String howMany = JOptionPane.showInputDialog("Welcome to the game of life!\nPlease enter how many cells you wish to start the game with.");
-    public static int cells = (int) Math.sqrt((double) Integer.parseInt(howMany));
+    public static String howMany = JOptionPane.showInputDialog("Welcome to the game of life!\nPlease enter how many cells you wish to start the game with.");    //Grid size selection
+    public static int cells = (int) Math.sqrt((double) Integer.parseInt(howMany));      //cell rows and columns = sqrt of grid size
     public static String[][] cell = new String[cells][cells];
     public static String dead = ".";
     public static String alive = "O";
@@ -62,7 +60,8 @@ public abstract class GameOfLife implements WindowListener {
                 cell[i][j] = dead;
             }
         }
-
+        
+        //determine random cell positions on gen 0
         for (int k = 0; k < randomCells; k++) {
             int randomNum1 = rand.nextInt(cells - 0); //max - min + 1
             int randomNum2 = rand.nextInt(cells - 0); //max - min + 1
@@ -136,7 +135,7 @@ public abstract class GameOfLife implements WindowListener {
         }
         System.out.println("----Generation " + gen + "-------------------------------------------------");
 
-        //get positions from calcs method and print next generation to console
+        //get cells from calcs method and print next generation to console
         calcs();
         initCells();
 
@@ -148,33 +147,29 @@ public abstract class GameOfLife implements WindowListener {
         String input;
         boolean game = true;
        
-        
-        //load gen 0
-        
-        
-
+        //continue running input menu
         try {
             while (game = true) {
-                //run next generation11
+                //run next input while initializing new JFrame;
                 JFrame f = new JFrame(input = JOptionPane.showInputDialog("1 - Advance one generation\nexit - exit game."));
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 input = f.getTitle();
-                System.out.print(input);
 
+                //load next gen on input
                 if (input.equals("1")) {
                     nextGen();
-                    
+                
+                //close program on input
                 } else if (input.equals("exit")) {
                     System.exit(0);
                     }
-                
-                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
         }
     }
     
-    
+    //End program on close
     public void windowClosing(WindowEvent e) {
        System.exit(0);
     }
