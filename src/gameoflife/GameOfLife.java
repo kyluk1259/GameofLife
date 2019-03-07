@@ -5,7 +5,10 @@
  */
 package gameoflife;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Random;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +17,7 @@ import javax.swing.JOptionPane;
  * March 6th 2019
  * Game of Life
  */
-public class GameOfLife {
+public abstract class GameOfLife implements WindowListener {
 
     /**
      * @param args the command line arguments
@@ -32,6 +35,7 @@ public class GameOfLife {
     public static int counter = 0;
     public static Random rand = new Random();
     public static int gen = 0;
+    
 
     //print cells to console in correct order
     public static void initCells() {
@@ -140,25 +144,38 @@ public class GameOfLife {
 
     public static void main(String[] args) {
         // TODO code application logic here
-
-        //load gen 0
-        boolean game = true;
         firstGen();
+        String input;
+        boolean game = true;
+       
+        
+        //load gen 0
+        
+        
 
         try {
             while (game = true) {
-                String input = JOptionPane.showInputDialog("1 - Advance one generation\nexit - exit game.");
+                //run next generation11
+                JFrame f = new JFrame(input = JOptionPane.showInputDialog("1 - Advance one generation\nexit - exit game."));
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                input = f.getTitle();
+                System.out.print(input);
 
-                //run next generation
                 if (input.equals("1")) {
                     nextGen();
+                    
                 } else if (input.equals("exit")) {
-                    game = false;
                     System.exit(0);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+                    }
+                
+                    }
+            } catch (Exception e) {
+                e.printStackTrace();
         }
+    }
+    
+    
+    public void windowClosing(WindowEvent e) {
+       System.exit(0);
     }
 }
